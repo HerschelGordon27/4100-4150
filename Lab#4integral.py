@@ -23,6 +23,7 @@ q=np.zeros(len(w))
 for i in range(len(w)):
     q[i]=g(w[i])
 plt.plot(w,g(w))
+plt.show()
 
 T=3000
 def f(x):
@@ -37,8 +38,8 @@ s= ((1/2)*f(a))+((1/2)*f(b))
 for m in range(1,N):
     s += f(a+m*h2)
 j=h2*s
-tol=w*j
+print(tol=w*j)
 
-uk=T**4
-tol/uk
+print(uk=T**4)
+print(tol/uk)
 
