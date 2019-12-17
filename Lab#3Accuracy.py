@@ -13,6 +13,7 @@ y=np.zeros(len(da))
 for i in range(len(da)):
                y[i]=g(da[i])
 plt.plot(da,g(da))
+plt.show()
 
 N=100
 k=np.linspace(1,N,N)
@@ -26,6 +27,8 @@ def inte(k):
 u=np.zeros(len(k))
 for b in range(len(k)):
     u[b]=inte(k[b])
+    
+print(sum(u))
 
 
     
