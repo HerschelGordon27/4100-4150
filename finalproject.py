@@ -101,3 +101,48 @@ lactus=(p1,p2,90)
 
 def rfromsun(lactus):
     return 
+
+
+
+
+def map_orbit(eccentricity,op_planet1):
+    n=360###steps
+    array_planet=np.linspace(0.0,op_planet1,n) ###creates different moments in earths orbit
+    
+    angle=[]
+    for i in array_planet:
+        Diff=1.0
+        rate_planet= (2*np.pi*i)/(op_planet1)
+        DiffO=rate_planet
+        angleold=180.0
+        while Diff>1e-10:
+            DiffN= rate_planet+(eccentricity*np.sin(DiffO))
+            Diff= DiffN-DiffO
+            DiffO=DiffN
+        angle_diff=2*np.arctan(((1+eccentricity)/(1-eccentricity))**(0.5)*np.tan(DiffO/2))
+        angle.append(angle_diff)
+    return angle
+
+
+
+map_earth=map_orbit(eccentricity_1,op_earth)
+map_planet=map_orbit(eccentricity2,op_planet)
+
+
+def planet_orbit(semi,ecce,anom):
+    rorbit= semi*(1-ecce**2)/(1+ecce*np.cos(anom))
+    xorbit=rorbit*np.cos(anom)
+    yorbit=rorbit*np.sin(anom)
+    return xorbit,yorbit
+
+
+earthmapx,earthmapy=planet_orbit(semimajorearth,eccentricity_1,map_earth)
+planetmapx,planetmapy=planet_orbit(semimajor,eccentricity2,map_planet)
+
+
+plt.scatter(earthmapx,earthmapy)
+plt.scatter(planetmapx,planetmapy)
+plt.show()
+
+
+                               
